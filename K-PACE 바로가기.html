@@ -1,0 +1,194 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>K-PACE 바로가기</title><style id="css">
+/* Layout: one column of large tap targets, phone-first; header with edit toggle; edit mode swaps tiles for a form list */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --ink:#15202e; --muted:#5b6778; --line:#dde2ea;
+  --accent:#1f5fae; --accent-ink:#ffffff; --accent-soft:#e6eef9;
+  --sheet:#18794e; --sheet-soft:#e3f3ea; --cafe:#b4521c; --cafe-soft:#fbeadf; --none:#8a94a3; --none-soft:#eef0f3;
+  --danger:#b42318; --danger-soft:#fdecea;
+  --f-body:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-display:"Gothic A1","IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f141b; --surface:#18202b; --ink:#e7ecf2; --muted:#9aa6b6; --line:#2a3543;
+  --accent:#6ea6ee; --accent-ink:#0b1420; --accent-soft:#1c2c42;
+  --sheet:#5cc493; --sheet-soft:#183326; --cafe:#f0975e; --cafe-soft:#3a2416; --none:#8792a2; --none-soft:#222b37;
+  --danger:#f2867a; --danger-soft:#3a1e1c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f141b; --surface:#18202b; --ink:#e7ecf2; --muted:#9aa6b6; --line:#2a3543;
+  --accent:#6ea6ee; --accent-ink:#0b1420; --accent-soft:#1c2c42;
+  --sheet:#5cc493; --sheet-soft:#183326; --cafe:#f0975e; --cafe-soft:#3a2416; --none:#8792a2; --none-soft:#222b37;
+  --danger:#f2867a; --danger-soft:#3a1e1c; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:560px;margin:0 auto;padding:20px 16px 40px;display:flex;flex-direction:column;gap:20px}
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.brand small{display:block;font-size:12px;letter-spacing:.12em;color:var(--muted);font-weight:600}
+.brand h1{margin:2px 0 0;font-family:var(--f-display);font-weight:800;font-size:28px;letter-spacing:-.01em;text-wrap:balance}
+.brand h1 b{color:var(--accent);font-weight:800}
+button{font:inherit;cursor:pointer}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:9px 14px;font-size:14px;font-weight:600;min-height:40px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent}
+.btn.danger{color:var(--danger);border-color:var(--danger);background:var(--danger-soft)}
+.btn:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn[disabled]{opacity:.5;cursor:default}
+.list{display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0;padding:8px;list-style:none;background:var(--line);border-radius:18px}
+@media (min-width:520px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.grid li{min-width:0}
+.grid .tile{aspect-ratio:1/1;max-width:100%;flex-direction:column;align-items:flex-start;justify-content:space-between;min-height:0;border-radius:12px;padding:14px;gap:8px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.06)}
+.grid .t-name{font-size:18px;line-height:1.3;word-break:keep-all;overflow-wrap:anywhere}
+.grid .t-sub{white-space:normal;font-weight:600}
+.k-sheet .t-sub{color:var(--sheet)} .k-cafe .t-sub{color:var(--cafe)} .k-link .t-sub{color:var(--accent)}
+.grid .arrow{align-self:flex-end;margin-top:auto}
+.grid .k-none{background:transparent}
+.tile{display:flex;align-items:center;gap:14px;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:14px;color:inherit;text-decoration:none;min-height:76px;transition:transform .12s ease,border-color .12s ease}
+a.tile:active{transform:scale(.985)}
+a.tile:hover{border-color:var(--accent)}
+.mark{flex:none;width:44px;height:44px;border-radius:11px;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:18px}
+.k-sheet .mark{background:var(--sheet-soft);color:var(--sheet)}
+.k-cafe .mark{background:var(--cafe-soft);color:var(--cafe)}
+.k-link .mark{background:var(--accent-soft);color:var(--accent)}
+.k-none .mark{background:var(--none-soft);color:var(--none)}
+.t-body{flex:1;min-width:0}
+.t-name{font-weight:700;font-size:17px;line-height:1.3}
+.t-sub{font-size:13px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.k-none{border-style:dashed;cursor:default}
+.k-none .t-name{color:var(--muted)}
+.arrow{flex:none;color:var(--muted);font-size:20px}
+.note{font-size:13px;color:var(--muted);text-align:center}
+/* edit */
+.ed{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.ed label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.04em}
+.ed input{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px 11px;width:100%;min-width:0}
+.ed input.bad{border-color:var(--danger)}
+.ed .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.ed .row .sp{flex:1}
+.ed .err{font-size:13px;color:var(--danger)}
+.bar{position:sticky;bottom:0;padding:12px 0 calc(12px + env(safe-area-inset-bottom,0px));background:var(--bg);display:flex;gap:8px;justify-content:flex-end;border-top:1px solid var(--line)}
+.msg{font-size:14px;padding:10px 12px;border-radius:10px;background:var(--accent-soft);color:var(--ink)}
+.msg.err{background:var(--danger-soft);color:var(--danger)}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}}
+</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&family=IBM+Plex+Sans+KR:wght@400;600;700&display=swap"><div class="wrap"><header><div class="brand"><small>업무 파일 바로가기</small><h1>26-2 <b>K-PACE</b> 생활지도</h1></div><button class="btn ghost" id="editBtn" type="button" hidden>편집</button></header><div id="msg" hidden></div><main id="main"></main></div><script type="application/json" id="data">{"items":[{"id":"a7","name":"재학생 명단","url":"https://drive.google.com/drive/my-drive?hl=ko","note":""},{"id":"a1","name":"상·벌점 현황","url":"https://docs.google.com/spreadsheets/d/15WEqoH0ZGRKCxIvpSYj3iBZt7reA1W_ykAlq5d31MPE/edit?gid=1462078246#gid=1462078246","note":""},{"id":"a2","name":"단체외박 현황","url":"https://docs.google.com/spreadsheets/d/1DLkplXC0MJABgZeyggcvMv7dZJNhTbI4Qr4ZKVX_gWM/edit?gid=0#gid=0","note":""},{"id":"a3","name":"외출·외박 명단 현황","url":"https://docs.google.com/spreadsheets/d/1ukQ7xyU9IqnEAgfI85r35wnW8wOiU9YOG7Sx0H4YI-0/edit","note":""},{"id":"a4","name":"초과근무 작성 현황","url":"https://docs.google.com/spreadsheets/d/1493Ip7JGWG79Yi6REgalq3iPAcQhsmEFwfRba0I0eQ8/edit","note":""},{"id":"a6","name":"카페","url":"https://cafe.daum.net/K-PACE","note":""},{"id":"nmvhdm5pe","name":"생활지도 근무 시간표","url":"https://docs.google.com/spreadsheets/d/1YCWgG8D75HHmIUr2gALJ3-j42Jcr4LYbE1O8p48JDPM/edit?gid=69912899#gid=69912899","note":""}]}</script><script id="app">
+(function(){
+  var state;
+  try{ state = JSON.parse(document.getElementById('data').textContent); }catch(e){ state = {items:[]}; }
+  if(!state.items) state.items = [];
+  var editing = false, draft = null, confirmDel = null, saving = false;
+  var main = document.getElementById('main'), editBtn = document.getElementById('editBtn'), msgEl = document.getElementById('msg');
+  var art = null;
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function kind(url){
+    if(!url) return {k:'none', label:'주소 준비 중'};
+    try{ var u = new URL(url); var h = u.hostname;
+      if(h.indexOf('docs.google.com')>-1 && u.pathname.indexOf('/spreadsheets')===0) return {k:'sheet', label:'구글 시트'};
+      if(h.indexOf('docs.google.com')>-1) return {k:'link', label:'구글 문서'};
+      if(h.indexOf('drive.google.com')>-1) return {k:'link', label:'구글 드라이브'};
+      if(h.indexOf('cafe.naver.com')>-1) return {k:'cafe', label:'네이버 카페'};
+      if(h.indexOf('cafe.daum.net')>-1) return {k:'cafe', label:'다음 카페'};
+      return {k:'link', label:h.replace(/^www\./,'')};
+    }catch(e){ return {k:'none', label:'주소 확인 필요'}; }
+  }
+  function initial(name){ var s = String(name||'').replace(/[^0-9A-Za-z가-힣]/g,''); return s.charAt(0) || '·'; }
+  function showMsg(text, isErr){ if(!text){ msgEl.hidden = true; return; } msgEl.className = 'msg' + (isErr?' err':''); msgEl.textContent = text; msgEl.hidden = false; }
+
+  function renderView(){
+    if(!state.items.length){ main.innerHTML = '<p class="note">등록된 바로가기가 없습니다. 편집을 눌러 추가하세요.</p>'; return; }
+    var h = '<ul class="grid">';
+    state.items.forEach(function(it){
+      var k = kind(it.url), sub = it.note ? esc(it.note) : esc(k.label);
+      var inner = '<span class="t-body"><span class="t-name" style="display:block">'+esc(it.name)+'</span><span class="t-sub" style="display:block">'+sub+'</span></span>';
+      if(k.k==='none') h += '<li><div class="tile k-none" aria-disabled="true">'+inner+'</div></li>';
+      else h += '<li><a class="tile k-'+k.k+'" href="'+esc(it.url)+'" target="_blank" rel="noopener">'+inner+'<span class="arrow" aria-hidden="true">›</span></a></li>';
+    });
+    main.innerHTML = h + '</ul><p class="note">버튼을 누르면 해당 시트가 새 창으로 열립니다.</p>';
+  }
+
+  function renderEdit(){
+    var h = '<div class="list">';
+    draft.forEach(function(it, i){
+      var bad = it.url && !/^https?:\/\//i.test(it.url);
+      h += '<div class="ed" data-i="'+i+'">'+
+        '<label for="n_'+it.id+'">이름<input id="n_'+it.id+'" data-f="name" value="'+esc(it.name)+'" placeholder="예: 상·벌점 현황"></label>'+
+        '<label for="u_'+it.id+'">주소<input id="u_'+it.id+'" data-f="url" inputmode="url" class="'+(bad?'bad':'')+'" value="'+esc(it.url)+'" placeholder="https://… (비워두면 준비 중으로 표시)"></label>'+
+        (bad?'<div class="err">주소는 https:// 로 시작해야 합니다.</div>':'')+
+        '<label for="d_'+it.id+'">설명 (선택)<input id="d_'+it.id+'" data-f="note" value="'+esc(it.note)+'" placeholder="비워두면 링크 종류가 표시됩니다"></label>'+
+        '<div class="row">'+
+          '<button class="btn" type="button" data-a="up" '+(i===0?'disabled':'')+' aria-label="위로">↑</button>'+
+          '<button class="btn" type="button" data-a="down" '+(i===draft.length-1?'disabled':'')+' aria-label="아래로">↓</button>'+
+          '<span class="sp"></span>'+
+          (confirmDel===it.id
+            ? '<button class="btn ghost" type="button" data-a="keep">취소</button><button class="btn danger" type="button" data-a="del">삭제 확인</button>'
+            : '<button class="btn ghost" type="button" data-a="askdel">삭제</button>')+
+        '</div></div>';
+    });
+    h += '</div><button class="btn" type="button" data-a="add" style="width:100%;margin-top:10px">+ 바로가기 추가</button>'+
+      '<div class="bar"><button class="btn ghost" type="button" data-a="cancel">취소</button><button class="btn primary" type="button" data-a="save" '+(saving?'disabled':'')+'>'+(saving?'저장 중…':'저장')+'</button></div>';
+    main.innerHTML = h;
+  }
+
+  function render(){ editBtn.textContent = editing ? '보기로' : '편집'; editing ? renderEdit() : renderView(); }
+
+  main.addEventListener('input', function(e){
+    var f = e.target.getAttribute('data-f'); if(!f) return;
+    var card = e.target.closest('.ed'); var i = +card.getAttribute('data-i');
+    draft[i][f] = e.target.value;
+  });
+  main.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-a]'); if(!b) return;
+    var a = b.getAttribute('data-a'), card = b.closest('.ed'), i = card ? +card.getAttribute('data-i') : -1;
+    if(a==='up' && i>0){ var t=draft[i-1]; draft[i-1]=draft[i]; draft[i]=t; }
+    else if(a==='down' && i<draft.length-1){ var t2=draft[i+1]; draft[i+1]=draft[i]; draft[i]=t2; }
+    else if(a==='askdel'){ confirmDel = draft[i].id; }
+    else if(a==='keep'){ confirmDel = null; }
+    else if(a==='del'){ draft.splice(i,1); confirmDel = null; }
+    else if(a==='add'){ var id='n'+Date.now().toString(36); draft.push({id:id,name:'',url:'',note:''}); renderEdit(); var el=document.getElementById('n_'+id); if(el) el.focus(); return; }
+    else if(a==='cancel'){ editing=false; draft=null; confirmDel=null; showMsg(''); render(); return; }
+    else if(a==='save'){ save(); return; }
+    renderEdit();
+  });
+  editBtn.addEventListener('click', function(){
+    if(editing){ editing=false; draft=null; confirmDel=null; showMsg(''); }
+    else { editing=true; draft = state.items.map(function(x){return {id:x.id,name:x.name,url:x.url,note:x.note||''};}); }
+    render();
+  });
+
+  var RESET = ':root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}';
+  function buildDoc(s){
+    var css = document.getElementById('css').textContent;
+    var app = document.getElementById('app').textContent;
+    var shell = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@800&family=IBM+Plex+Sans+KR:wght@400;600;700&display=swap">'+
+      '<div class="wrap"><header><div class="brand"><small>업무 파일 바로가기</small><h1>26-2 <b>K-PACE</b> 생활지도</h1></div><button class="btn ghost" id="editBtn" type="button" hidden>편집</button></header><div id="msg" hidden></div><main id="main"></main></div>';
+    var json = JSON.stringify(s).replace(/</g,'\\u003c');
+    var SC = '<'+'/script>';
+    return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>'+RESET+'</style></head><body>'+
+      '<title>K-PACE 바로가기</title><style id="css">'+css+'</style>'+shell+
+      '<script type="application/json" id="data">'+json+SC+'<script id="app">'+app+SC+'</body></html>';
+  }
+
+  function save(){
+    var clean = draft.map(function(x){return {id:x.id,name:x.name.trim(),url:x.url.trim(),note:x.note.trim()};});
+    if(clean.some(function(x){return !x.name;})){ showMsg('이름이 비어 있는 항목이 있습니다. 이름을 입력하거나 그 항목을 삭제하세요.', true); return; }
+    if(clean.some(function(x){return x.url && !/^https?:\/\//i.test(x.url);})){ showMsg('주소는 https:// 로 시작해야 합니다. 빨간 칸을 확인하세요.', true); return; }
+    if(!art){ showMsg('이 화면에서는 저장할 수 없습니다. 편집 권한이 있는 계정으로 열어주세요.', true); return; }
+    saving = true; renderEdit(); showMsg('');
+    art.publish(buildDoc({items:clean})).then(function(){ showMsg('저장했습니다.'); }).catch(function(err){
+      saving = false;
+      var c = err && err.code;
+      if(c==='conflict'){ showMsg('다른 곳에서 먼저 수정되어 최신 내용으로 다시 불러옵니다.'); return; }
+      if(c==='not_writer'||c==='not_granted'||c==='consent_required'||c==='capability_disabled'||c==='not_declared'){ showMsg('보기 전용입니다. 편집은 관리자만 할 수 있습니다.', true); editing=false; editBtn.hidden=true; render(); return; }
+      if(c==='rate_limited'){ showMsg('잠시 후 다시 저장해 주세요.', true); renderEdit(); return; }
+      showMsg('저장하지 못했습니다. 연결을 확인한 뒤 다시 눌러주세요.', true); renderEdit();
+    });
+  }
+
+  render();
+  if(window.claude && window.claude.use){
+    window.claude.use('artifact').then(function(ns){ art = ns; return window.claude.use('user'); }).then(function(u){
+      var can = u ? u.canEdit() : false;
+      Promise.resolve(can).then(function(ok){ if(ok && art){ editBtn.hidden = false; } });
+    }).catch(function(){});
+  }
+})();
+</script></body></html>
